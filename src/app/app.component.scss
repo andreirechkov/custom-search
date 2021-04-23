@@ -1,0 +1,30 @@
+.container-fluid {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 522px;
+  input {
+    width: 500px;
+    border-radius: unset;
+    border-bottom: 1px solid blue;
+    margin-bottom: 10px;
+  }
+
+  .list-group {
+    outline: none;
+    overflow: auto;
+    height: 237px;
+    .list-group-item {
+      display: flex;
+      justify-content: space-around;
+      border-color: green;
+    }
+    img { width: 100px; }
+  }
+  .list-group {
+    width: 100%;
+  }
+
+}
