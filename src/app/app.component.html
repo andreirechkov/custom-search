@@ -1,20 +1,21 @@
 <div class="container-fluid">
-  <div (focusout)="container$.next(false)" class="form-outline">
-    <input id="search"
-           type="text"
-           autocomplete="off"
-           class="form-control"
-           (keyup)="searchInput$.next($event)"
-           (focus)="container$.next(true)">
-    <label  class="form-label" for="search">{{ showListSearch ? 'Search' : null }}</label>
-  </div>
-  <div tabindex="1" *ngIf="foundData.length && showListSearch" class="list-group">
-    <ul class="list-group">
-      <li *ngFor="let result of foundData" class="list-group-item">
-        <span>{{ result.name }}</span>
-        <img [src]="result.image" [alt]="result.name">
-      </li>
-    </ul>
+  <div (focusout)="container$.next($event)">
+    <div class="form-outline">
+      <input id="search"
+             type="text"
+             autocomplete="off"
+             class="form-control"
+             (keyup)="searchInput$.next($event)"
+             (focus)="container$.next($event)">
+    </div>
+    <div tabindex="1" *ngIf="foundData.length && showListSearch" class="list-group">
+      <ul class="list-group">
+        <li *ngFor="let result of foundData" class="list-group-item">
+          <span>{{ result.name }}</span>
+          <img [src]="result.image" [alt]="result.name">
+        </li>
+      </ul>
+    </div>
   </div>
   <div *ngIf="!exist" class="alert alert-danger" role="alert">
     Not found

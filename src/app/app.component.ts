@@ -30,11 +30,11 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
-    this.searchInput$.pipe(takeUntil(this.destroy$), debounceTime(1000), distinctUntilChanged())
+    this.searchInput$.pipe(debounceTime(1000), distinctUntilChanged(), takeUntil(this.destroy$))
       .subscribe((title: any) => this.searchResult(title.target.value.toLowerCase()));
 
-    this.container$.pipe(takeUntil(this.destroy$)).subscribe((isFocused: any) => {
-      this.showListSearch = isFocused;
+    this.container$.pipe(takeUntil(this.destroy$)).subscribe((event: any) => {
+      this.showListSearch = !!event.relatedTarget || event.type === 'focus';
     });
   }
 
