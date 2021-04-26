@@ -23,18 +23,18 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
   public foundData: Array<{ id: number; name: string; image: string}> = [];
   public showListSearch = false;
-  public exist = false;
+  public exist = true;
 
   private destroy$ = new Subject();
 
   constructor() {}
 
   ngOnInit(): void {
-    this.searchInput$.pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
+    this.searchInput$.pipe(takeUntil(this.destroy$), debounceTime(1000), distinctUntilChanged())
       .subscribe((title: any) => this.searchResult(title.target.value.toLowerCase()));
 
-    this.container$.pipe(takeUntil(this.destroy$)).subscribe((event: any) => {
-      this.showListSearch = event.type === 'focus';
+    this.container$.pipe(takeUntil(this.destroy$)).subscribe((isFocused: any) => {
+      this.showListSearch = isFocused;
     });
   }
 
@@ -45,6 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private searchResult(name: string): void {
     this.foundData = this.data.filter(item => item.name.toLowerCase().includes(name));
-    this.exist = !this.foundData.length;
+    this.exist = !!this.foundData.length;
   }
 }

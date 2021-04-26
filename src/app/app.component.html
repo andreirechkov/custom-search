@@ -1,12 +1,12 @@
 <div class="container-fluid">
-  <div (focusout)="container$.next($event)" class="form-outline">
+  <div (focusout)="container$.next(false)" class="form-outline">
     <input id="search"
            type="text"
            autocomplete="off"
            class="form-control"
            (keyup)="searchInput$.next($event)"
-           (focus)="container$.next($event)">
-    <label  class="form-label" for="search">{{ showListSearch ? 'Search' : null}}</label>
+           (focus)="container$.next(true)">
+    <label  class="form-label" for="search">{{ showListSearch ? 'Search' : null }}</label>
   </div>
   <div tabindex="1" *ngIf="foundData.length && showListSearch" class="list-group">
     <ul class="list-group">
@@ -16,7 +16,7 @@
       </li>
     </ul>
   </div>
-  <div *ngIf="exist" class="alert alert-danger" role="alert">
+  <div *ngIf="!exist" class="alert alert-danger" role="alert">
     Not found
   </div>
 </div>
